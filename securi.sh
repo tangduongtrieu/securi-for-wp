@@ -39,21 +39,20 @@ sed -i '/DISALLOW_FILE_EDIT/d' wp-config.php
 sed -i '/<?php/a define("DISALLOW_FILE_EDIT",true );' wp-config.php
 
 # Tắt cài đặt upload Theme + Plugin.
-sed -i '/DISALLOW_FILE_MODS/d' wp-config.php
-sed -i '/<?php/a define("DISALLOW_FILE_MODS",true);' wp-config.php
+#sed -i '/DISALLOW_FILE_MODS/d' wp-config.php
+#sed -i '/<?php/a define("DISALLOW_FILE_MODS",true);' wp-config.php
 
 # Bật chức năng tự động Update Mã nguồn
-#sed -i '/WP_AUTO_UPDATE_CORE/d' wp-config.php
-
-#sed -i '/<?php/a define("WP_AUTO_UPDATE_CORE",true);' wp-config.php
+sed -i '/WP_AUTO_UPDATE_CORE/d' wp-config.php
+sed -i '/<?php/a define("WP_AUTO_UPDATE_CORE",true);' wp-config.php
 
 # Tắt chức năng Update
 #sed -i '/AUTOMATIC_UPDATER_DISABLED/d' wp-config.php
 #sed -i '/<?php/a define ("AUTOMATIC_UPDATER_DISABLED", true);' wp-config.php
 
 # Bật chức năng tự động Update Plugin.
-#sed -i '/auto_update_plugin/d' wp-config.php
-#echo 'add_filter ("auto_update_plugin", "__return_true");' >> wp-config.php
+sed -i '/auto_update_plugin/d' wp-config.php
+echo 'add_filter ("auto_update_plugin", "__return_true");' >> wp-config.php
 
 # Bật chức năng tự động Update Theme.
 #sed -i '/auto_update_theme/d' wp-config.php
@@ -65,8 +64,8 @@ sed -i '/<?php/a define("WP_DEBUG",false);' wp-config.php
 sed -i '/<?php/a define("WP_DEBUG_DISPLAY",false);' wp-config.php
 
 # Tắt thanh admin bar.
-sed -i '/show_admin_bar/d' wp-config.php 
-echo 'add_filter("show_admin_bar", "__return_false");' >> wp-config.php
+#sed -i '/show_admin_bar/d' wp-config.php 
+#echo 'add_filter("show_admin_bar", "__return_false");' >> wp-config.php
 
 echo "  Tùy chỉnh wp-login.php"
 

@@ -1,6 +1,6 @@
 # Securi For Wordpress 1.0
 
-Script bảo mật cho Worpress
+Script bảo mật cho Worpress cho VPS Linux
 
 Chức năng:
 
@@ -18,3 +18,9 @@ Chức năng:
 6. Chmod 400 wp-config.php
 
 7. Chmod 400 nginx.conf
+
+Hướng dẫn sử dụng
+
+Clone về hoặc copy file securi.sh đến VPS.
+Cấp quyền 755 cho file securi.sh, rồi chạy file.
+done!

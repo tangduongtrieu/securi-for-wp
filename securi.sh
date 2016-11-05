@@ -6,8 +6,8 @@ user="admin"
 pass="admin"
 
 # Loại trừ tên miền bên dưới.
-# Phù hợp với thư mục gốc có dạng: /home/nginx/domains/domain.com/public)
-loaitru="domain.com"
+# Phù hợp với thư mục gốc có dạng: /home/nginx/domains/tangduongtrieu.com/public)
+loaitru="tangduongtrieu.com"
 
 #Grep đường dẫn đến tất cả Website có mã nguồn Wordpress.
 site=`find / -name wp-config.php | grep -oP '.{0,200}/public/' | grep -Ev "$loaitru"`
@@ -15,7 +15,7 @@ site=`find / -name wp-config.php | grep -oP '.{0,200}/public/' | grep -Ev "$loai
 # Vòng lặp for để chạy những câu lệnh bên dưới, cho tất cả Website mã nguồn WP.
 for si in $site; do
 {
-# Chuyển đến thư mục của Website.(Ví dụ: /home/nginx/domains/domain.com/public)
+# Chuyển đến thư mục của Website.(Ví dụ: /home/nginx/domains/tangduongtrieu.com/public)
 cd $si
 echo "Đang tùy chỉnh cho" $si
 # Backup File wp-config.php + wp-login.php

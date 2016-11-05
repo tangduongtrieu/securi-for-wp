@@ -94,3 +94,4 @@ chmod 400 nginx.conf
 echo " "
 }
 done
+# Nguồn: tangduongtrieu.com

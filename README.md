@@ -1,6 +1,6 @@
 # Securi For Wordpress
 
-Script bảo mật cho Worpress
+Script bảo mật cho Worpress 1.0
 
 Chức năng:
 

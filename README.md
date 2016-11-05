@@ -4,7 +4,7 @@ Script bảo mật cho Worpress
 
 Chức năng:
 
-1. Tìm kiếm tất cả mã nguồn WP trên VPS.
+1. Tự động tìm kiếm tất cả mã nguồn WP trên VPS và tối ưu bảo mật cho nó.
 2. Backup 2 file wp-config.php và wp-login.php trước khi chỉnh sửa.
 3. Bắt đầu chỉnh sửa wp-config.php
 - Không cho edit Theme + Plugin

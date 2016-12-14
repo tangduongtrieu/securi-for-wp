@@ -10,7 +10,7 @@ pass="admin"
 loaitru="tangduongtrieu.com"
 
 #Grep đường dẫn đến tất cả Website có mã nguồn Wordpress.
-site=`find / -name wp-config.php | grep -oP '.{0,200}/public/' | grep -Ev "$loaitru"`
+site=`find / -name wp-config.php | sed 's/wp-config.php.*//' | grep -Ev "$loaitru"`
 
 # Vòng lặp for để chạy những câu lệnh bên dưới, cho tất cả Website mã nguồn WP.
 for si in $site; do

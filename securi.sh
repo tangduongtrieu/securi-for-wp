@@ -81,16 +81,16 @@ echo "  Xóa tất cả file có tên readme, changelog, history, license"
 # Xóa tất cả file readme changelog history... trong tất cả thư mục  của WP.
 find ./ \( -name readme.txt -o -name readme.html -o -name readme.htm -o -name license.txt -o -name history.txt -o -name changelog.txt -o -name changelog.html \) -exec rm -rf {} \;
 
-echo "  chmod 400 wp-config.php"
-# Chmod 400 cho wp-config.php.
-chmod 400 wp-config.php
+echo "  chmod 444 wp-config.php"
+# Chmod 444 cho wp-config.php.
+chmod 444 wp-config.php
 
-echo "  chmod 400 nginx.conf"
-# Chmod 400 cho nginx.conf.
-chmod 400 nginx.conf
+echo "  chmod 444 nginx.conf"
+# Chmod 444 cho nginx.conf.
+chmod 4444 nginx.conf
 
-# Chmod 400 cho .htaccess.
-#chmod 400 .htaccess
+# Chmod 444 cho .htaccess.
+#chmod 444 .htaccess
 echo " "
 }
 done

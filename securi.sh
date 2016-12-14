@@ -87,7 +87,7 @@ chmod 444 wp-config.php
 
 echo "  chmod 444 nginx.conf"
 # Chmod 444 cho nginx.conf.
-chmod 4444 nginx.conf
+chmod 444 nginx.conf
 
 # Chmod 444 cho .htaccess.
 #chmod 444 .htaccess

@@ -12,6 +12,7 @@ I> Chức năng:
 5. Xóa tất cả file có tên readme, changelog, history, license...
 6. Chmod 444 wp-config.php
 7. Chmod 444 nginx.conf
+8. Chỉnh sửa file robots.txt
 
 II> Hướng dẫn sử dụng
 

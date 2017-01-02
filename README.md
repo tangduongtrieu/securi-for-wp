@@ -22,5 +22,11 @@ II> Hướng dẫn sử dụng
 3.Cấp quyền 755 cho file securi.sh, rồi chạy file.
 
 done!
+
 Video demo
+
 https://www.youtube.com/watch?v=v_H6R68hkBM
+
+Bài hướng dẫn cụ thể:
+
+http://tangduongtrieu.com/huong-dan-cach-bao-mat-website-wordpress/

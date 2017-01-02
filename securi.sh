@@ -1,12 +1,15 @@
+#!/bin/bash
+{
 # Chuyển đến thư mục gốc của VPS
 cd ~
 
 # Tạo biến đăng nhập 2 bước với WP.
 user="admin"
 pass="admin"
-
 # Nhập mật khẩu root của Mysql
 sqlpass="matkhau_root_mysql"
+# Email gửi thông báo sau khi hoàn thành
+email="tangduongtrieu@gmail.com"
 
 # Tạo thư mục backups
 mkdir /var/backups/
@@ -104,3 +107,4 @@ echo " "
 }
 done
 # Nguồn: tangduongtrieu.com
+} | /usr/sbin/sendmail $email

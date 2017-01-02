@@ -5,31 +5,38 @@ cd ~
 user="admin"
 pass="admin"
 
-# Loại trừ tên miền bên dưới.
-# Phù hợp với thư mục gốc có dạng: /home/nginx/domains/tangduongtrieu.com/public)
-loaitru="tangduongtrieu.com"
+# Nhập mật khẩu root của Mysql
+sqlpass="matkhau_root_mysql"
+
+# Tạo thư mục backups
+mkdir /var/backups/
+chmod -R 777 /var/backups/
 
 #Grep đường dẫn đến tất cả Website có mã nguồn Wordpress.
-site=`find / -name wp-config.php | sed 's/wp-config.php.*//' | grep -Ev "$loaitru"`
+site=`find / -name wp-config.php | sed 's/wp-config.php.*//'`
 
 # Vòng lặp for để chạy những câu lệnh bên dưới, cho tất cả Website mã nguồn WP.
 for si in $site; do
 {
 # Chuyển đến thư mục của Website.(Ví dụ: /home/nginx/domains/tangduongtrieu.com/public)
 cd $si
+# Lấy Database Name
+db=`cat wp-config.php | grep DB_NAME | cut -d \' -f 4`
+echo "Bắt đầu Backup cho database $db";
+mysqldump --force --opt --user root -p$sqlpass --databases $db | gzip > /var/backups/$(date +"%d-%m-%Y")_database_$db.gz
+echo "Bắt đầu Backup cho source $db";
+zip -r /var/backups/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache/**\*
+
 echo "Đang tùy chỉnh cho" $si
-# Backup File wp-config.php + wp-login.php
-if [[ -n $(find ./ -name "wp-config.php.tdt" -o -name "wp-login.php.tdt") ]]
+# Backup File wp-config.php
+if [[ -n $(find ./ -name "wp-config.php.tdt"]]
 then
-	echo "  Đã tồn tại file backup"
+	echo "  Đã tồn tại file wp-config.php.tdt"
 else
-	echo "  Bắt đầu tạo file dự phòng"
+	echo "  Bắt đầu tạo file wp-config.php.tdt"
 	cp -r wp-config.php wp-config.php.tdt
 	echo "   wp-config.php.tdt ==>> done"
 	chmod +400 wp-config.php.tdt
-	cp -r wp-login.php wp-login.php.tdt
-	echo "   wp-login.php.tdt ==>> done"
-	chmod +400 wp-login.php.tdt
 fi
 
 echo "  Tùy chỉnh wp-config.php"
@@ -82,15 +89,17 @@ echo "  Xóa tất cả file có tên readme, changelog, history, license"
 find ./ \( -name readme.txt -o -name readme.html -o -name readme.htm -o -name license.txt -o -name history.txt -o -name changelog.txt -o -name changelog.html \) -exec rm -rf {} \;
 
 echo "  chmod 444 wp-config.php"
-# Chmod 444 cho wp-config.php.
 chmod 444 wp-config.php
 
 echo "  chmod 444 nginx.conf"
-# Chmod 444 cho nginx.conf.
 chmod 444 nginx.conf
 
-# Chmod 444 cho .htaccess.
-#chmod 444 .htaccess
+echo "  Tùy chỉnh robots.txt"
+sed -i 'themes/d' wp-config.php
+sed -i 'Disallow: /wp-content/themes/*' robots.txt
+sed -i 'plugins/d' wp-config.php
+sed -i 'Disallow: /wp-content/plugins/*' robots.txt
+
 echo " "
 }
 done

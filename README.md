@@ -17,12 +17,19 @@ I> Chức năng:
 II> Hướng dẫn sử dụng
 
 -wget về hoặc copy file securi.sh đến VPS.
+
 wget https://github.com/tangduongtrieu/securi-for-wp/raw/master/securi.sh
+
 -Sửa $sqlpass là mật khẩu của root mysql
+
 nano securi.sh
+
 -Cấp quyền 777 cho file securi.sh
+
 chmod 777 securi.sh
+
 -Chạy script
+
 /root/securi.sh
 
 

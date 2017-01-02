@@ -1,26 +1,26 @@
-# Securi For Wordpress 1.0
+# Securi For Wordpress 2.0
 
 Script bảo mật cho Worpress cho VPS Linux
 
-Chức năng:
+I> Chức năng:
 
-1. Tự động tìm kiếm tất cả mã nguồn WP trên VPS và tối ưu bảo mật cho nó.
-
-2. Backup 2 file wp-config.php và wp-login.php trước khi chỉnh sửa.
-
+1. Backup Database + Source code.
+2. Backup file wp-config.php
 3. Bắt đầu chỉnh sửa wp-config.php
 (Không cho edit Theme + Plugin, Tắt chức năng cài đặt upload Theme + Plugin, Bật chức năng tự động Update Mã nguồn, Bật chức năng tự động Update Plugin, Tắt chức năng Debug và hiển thị Debug, Tắt thanh admin bar.)
+4. Thêm đăng nhập 2 bước cho Wordpress
+5. Xóa tất cả file có tên readme, changelog, history, license...
+6. Chmod 444 wp-config.php
+7. Chmod 444 nginx.conf
 
-4. Bắt đầu chỉnh sửa wp-login.php, thêm đăng nhập User+Pass cho trang Wp-admin + Wp-login.php.
+II> Hướng dẫn sử dụng
 
-5. Xóa tất cả file có tên readme, changelog, history, license.
+1.wget về hoặc copy file securi.sh đến VPS.
 
-6. Chmod 400 wp-config.php
+2.Sửa mysqlpass là mật khẩu của root mysql
 
-7. Chmod 400 nginx.conf
+3.Cấp quyền 755 cho file securi.sh, rồi chạy file.
 
-Hướng dẫn sử dụng
-
-Clone về hoặc copy file securi.sh đến VPS.
-Cấp quyền 755 cho file securi.sh, rồi chạy file.
 done!
+Video demo
+https://www.youtube.com/watch?v=v_H6R68hkBM

@@ -1,5 +1,4 @@
 #!/bin/bash
-{
 # Chuyển đến thư mục gốc của VPS
 cd ~
 
@@ -7,9 +6,7 @@ cd ~
 user="admin"
 pass="admin"
 # Nhập mật khẩu root của Mysql
-sqlpass="matkhau_root_mysql"
-# Email gửi thông báo sau khi hoàn thành
-email="tangduongtrieu@gmail.com"
+sqlpass="matkhau_mysql_root"
 
 # Tạo thư mục backups
 mkdir /var/backups/
@@ -32,15 +29,10 @@ zip -r /var/backups/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache
 
 echo "Đang tùy chỉnh cho" $si
 # Backup File wp-config.php
-if [[ -n $(find ./ -name "wp-config.php.tdt")]]
-then
-	echo "  Đã tồn tại file wp-config.php.tdt"
-else
-	echo "  Bắt đầu tạo file wp-config.php.tdt"
-	cp -r wp-config.php wp-config.php.tdt
-	echo "   wp-config.php.tdt ==>> done"
-	chmod +400 wp-config.php.tdt
-fi
+echo "  Tạo file wp-config.php.tdt"
+cp -r wp-config.php wp-config.php.tdt
+chmod +400 wp-config.php.tdt
+
 
 echo "  Tùy chỉnh wp-config.php"
 
@@ -98,13 +90,12 @@ echo "  chmod 444 nginx.conf"
 chmod 444 nginx.conf
 
 echo "  Tùy chỉnh robots.txt"
-sed -i 'themes/d' wp-config.php
-sed -i 'Disallow: /wp-content/themes/*' robots.txt
-sed -i 'plugins/d' wp-config.php
-sed -i 'Disallow: /wp-content/plugins/*' robots.txt
+sed -i '/themes/d' robots.txt
+sed -i '1i Disallow: /wp-content/themes/*' robots.txt
+sed -i '/plugins/d' robots.txt
+sed -i "1i Disallow: /wp-content/plugins/*" robots.txt
 
 echo " "
 }
 done
 # Nguồn: tangduongtrieu.com
-} | /usr/sbin/sendmail $email

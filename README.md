@@ -18,7 +18,7 @@ II> Hướng dẫn sử dụng
 
 1.wget về hoặc copy file securi.sh đến VPS.
 
-2.Sửa mysqlpass là mật khẩu của root mysql
+2.Sửa sqlpass là mật khẩu của root mysql
 
 3.Cấp quyền 755 cho file securi.sh, rồi chạy file.
 

@@ -32,7 +32,7 @@ zip -r /var/backups/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache
 
 echo "Đang tùy chỉnh cho" $si
 # Backup File wp-config.php
-if [[ -n $(find ./ -name "wp-config.php.tdt"]]
+if [[ -n $(find ./ -name "wp-config.php.tdt")]]
 then
 	echo "  Đã tồn tại file wp-config.php.tdt"
 else

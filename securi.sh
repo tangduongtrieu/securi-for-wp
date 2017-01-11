@@ -8,7 +8,7 @@ read user
 echo Please enter your Password:
 read pass
 # Nhập mật khẩu root của Mysql
-echo Please enter your Password MySQL root:
+echo Please enter your Password MySQL Root:
 read sqlpass
 
 # Tạo thư mục backups
@@ -25,19 +25,19 @@ for si in $site; do
 cd $si
 # Lấy Database Name
 db=`cat wp-config.php | grep DB_NAME | cut -d \' -f 4`
-echo "Bắt đầu Backup cho database $db";
+echo "Backup for database $db";
 mysqldump --force --opt --user root -p$sqlpass --databases $db | gzip > /var/backups/$(date +"%d-%m-%Y")_database_$db.gz
-echo "Bắt đầu Backup cho source $db";
+echo "Backup for source $db";
 zip -r /var/backups/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache/**\*
 
-echo "Đang tùy chỉnh cho" $si
+echo "Editing for" $si
 # Backup File wp-config.php
-echo "  Tạo file wp-config.php.tdt"
+echo "  Creating file wp-config.php.tdt"
 cp -r wp-config.php wp-config.php.tdt
 chmod +400 wp-config.php.tdt
 
 
-echo "  Tùy chỉnh wp-config.php"
+echo "  Editing for wp-config.php"
 
 # Không cho edit Theme + Plugin
 sed -i '/DISALLOW_FILE_EDIT/d' wp-config.php
@@ -82,7 +82,7 @@ echo "  Tạo thêm index.html cho tất cả Folder"
 # Tạo thêm file index.html trong tất cả các thư mục con của wp-content.
 find ./wp-content/ -type d -exec touch {}/index.html \;
 
-echo "  Xóa tất cả file có tên readme, changelog, history, license"
+echo "  Delete all file with name: readme, changelog, history, license"
 # Xóa tất cả file readme changelog history... trong tất cả thư mục  của WP.
 find ./ \( -name readme.txt -o -name readme.html -o -name readme.htm -o -name license.txt -o -name history.txt -o -name changelog.txt -o -name changelog.html \) -exec rm -rf {} \;
 
@@ -92,7 +92,7 @@ chmod 444 wp-config.php
 echo "  chmod 444 nginx.conf"
 chmod 444 nginx.conf
 
-echo "  Tùy chỉnh robots.txt"
+echo "  Editing robots.txt"
 sed -i '/themes/d' robots.txt
 sed -i '1i Disallow: /wp-content/themes/*' robots.txt
 sed -i '/plugins/d' robots.txt

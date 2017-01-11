@@ -3,10 +3,13 @@
 cd ~
 
 # Tạo biến đăng nhập 2 bước với WP.
-user="admin"
-pass="admin"
+echo Please enter your Username:
+read user
+echo Please enter your Password:
+read pass
 # Nhập mật khẩu root của Mysql
-sqlpass="matkhau_mysql_root"
+echo Please enter your Password MySQL root:
+read sqlpass
 
 # Tạo thư mục backups
 mkdir /var/backups/

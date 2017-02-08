@@ -3,14 +3,16 @@
 cd ~
 
 # Tạo biến đăng nhập 2 bước với WP.
-echo Please enter your Username:
-read user
-echo Please enter your Password:
-read pass
+#echo Please enter your Username:
+#read user
+#echo Please enter your Password:
+#read pass
+user="admin"
+pass="admin"
 # Nhập mật khẩu root của Mysql
-echo Please enter your Password MySQL Root:
-read sqlpass
-
+#echo Please enter your Password MySQL Root:
+#read sqlpass
+sqlpass="passsql"
 # Tạo thư mục backups
 mkdir /var/backups/
 chmod -R 777 /var/backups/
@@ -31,12 +33,6 @@ echo "Backup for source $db";
 zip -r /var/backups/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache/**\*
 
 echo "Editing for" $si
-# Backup File wp-config.php
-echo "  Creating file wp-config.php.tdt"
-cp -r wp-config.php wp-config.php.tdt
-chmod +400 wp-config.php.tdt
-
-
 echo "  Editing for wp-config.php"
 
 # Không cho edit Theme + Plugin
@@ -72,13 +68,13 @@ sed -i '/<?php/a define("WP_DEBUG_DISPLAY",false);' wp-config.php
 sed -i '/show_admin_bar/d' wp-config.php 
 #echo 'add_filter("show_admin_bar", "__return_false");' >> wp-config.php
 
-echo "  Tùy chỉnh wp-login.php"
+echo "  Editing wp-login.php"
 
 # Thêm đăng nhập User+Pass cho trang Wp-admin + Wp-login.php.
 sed -i '/Access Denied!!!/d' wp-login.php
 sed -i '/require( dirname/i \$config["user"] = "'$user'"; \$config["pass"] = "'$pass'"; if (\$_SERVER["PHP_AUTH_USER"] != \$config["user"] || \$_SERVER["PHP_AUTH_PW"] != \$config["pass"]){header("WWW-Authenticate: Basic realm=DangNhap");header("HTTP/1.0 401 Unauthorized"); echo "<center>Access Denied!!!</center>";exit;}' wp-login.php
 
-echo "  Tạo thêm index.html cho tất cả Folder"
+echo "  Add file index.html for all Folder"
 # Tạo thêm file index.html trong tất cả các thư mục con của wp-content.
 find ./wp-content/ -type d -exec touch {}/index.html \;
 

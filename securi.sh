@@ -24,7 +24,7 @@ db=`cat wp-config.php | grep DB_NAME | cut -d \' -f 4`
 echo "Backup for database $db";
 mysqldump --force --opt --user root -p$sqlpass --databases $db | gzip > /var/backups/$(date +"%d-%m-%Y")/$(date +"%d-%m-%Y")_database_$db.sql.gz
 echo "Backup for source $db";
-zip -r /var/backups/$(date +"%d-%m-%Y")/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache/**\*
+zip -r /var/backups/$(date +"%d-%m-%Y")/$(date +"%d-%m-%Y")_source_$db.zip ../../* -q -x /wp-content/cache/**\*
 
 echo "Editing for" $si
 echo "  Editing for wp-config.php"

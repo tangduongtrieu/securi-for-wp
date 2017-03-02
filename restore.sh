@@ -6,14 +6,17 @@
 	cp -rf /var/backups/$day/* /home/nginx/domains/
 	cp -rf /var/backups/$day/conf/* /usr/local/nginx/conf/
 	cd /home/nginx/domains
-	unzip -o '*.zip'
-	gunzip '*.sql.gz'
+	unzip -o '*.zip'	
+	gunzip *.gz
+	cat *.sql > all.sql
 	
-	find . -name "$day*.zip" -exec rm -rf {} \;
 	
 	passdata=`grep -oP "(?<=password=).*" ~/.my.cnf`
-	mysql -u root -p$passdata < *.sql
-	find . -name "$day*.gz" -exec rm -rf {} \;
+	mysql -u root -p$passdata < all.sql
+
 	find . -name "$day*.sql" -exec rm -rf {} \;
+	mv -f /home/nginx/domains/home/nginx/domains/* /home/nginx/domains/
+	rm -rf /home/nginx/domains/home
 	rm -rf conf
+	find . -name "$day*.zip" -exec rm -rf {} \;
 	service nginx restart

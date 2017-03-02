@@ -14,5 +14,5 @@
 	passdata=`grep -oP "(?<=password=).*" ~/.my.cnf`
 	mysql -u root -p$passdata < *.sql
 	find . -name "$day*.sql" -exec rm -rf {} \;
-	
+	rm -rf conf
 	service nginx restart

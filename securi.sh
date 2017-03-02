@@ -1,22 +1,16 @@
 #!/bin/bash
 # Chuyển đến thư mục gốc của VPS
 cd ~
-
-# Tạo biến đăng nhập 2 bước với WP.
-#echo Please enter your Username:
-#read user
-#echo Please enter your Password:
-#read pass
 user="admin"
 pass="admin"
-# Nhập mật khẩu root của Mysql
-#echo Please enter your Password MySQL Root:
-#read sqlpass
 sqlpass="passsql"
 # Tạo thư mục backups
 mkdir /var/backups/
+mkdir /var/backups/$(date +"%d-%m-%Y")/
 chmod -R 777 /var/backups/
-
+chmod -R 777 /var/backups/$(date +"%d-%m-%Y")/
+echo "Backup for Nginx";
+cp -r /usr/local/nginx/conf /var/backups/$(date +"%d-%m-%Y")/
 #Grep đường dẫn đến tất cả Website có mã nguồn Wordpress.
 site=`find / -name wp-config.php | sed 's/wp-config.php.*//'`
 
@@ -28,9 +22,9 @@ cd $si
 # Lấy Database Name
 db=`cat wp-config.php | grep DB_NAME | cut -d \' -f 4`
 echo "Backup for database $db";
-mysqldump --force --opt --user root -p$sqlpass --databases $db | gzip > /var/backups/$(date +"%d-%m-%Y")_database_$db.gz
+mysqldump --force --opt --user root -p$sqlpass --databases $db | gzip > /var/backups/$(date +"%d-%m-%Y")/$(date +"%d-%m-%Y")_database_$db.gz
 echo "Backup for source $db";
-zip -r /var/backups/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache/**\*
+zip -r /var/backups/$(date +"%d-%m-%Y")/$(date +"%d-%m-%Y")_source_$db.zip * -q -x /wp-content/cache/**\*
 
 echo "Editing for" $si
 echo "  Editing for wp-config.php"
